@@ -143,7 +143,7 @@ function generatePassword() {
     }
   } else {
     /* user did not specify upper or lowercase so generate lowercase */
-    for (var m = 0; m < (numElemsNeed / 2); m++) {
+    for (var m = 0; m < numElemsNeed; m++) {
       var lowerCase = Math.floor(Math.random() * lowerArr.length);
       var lowerVal = lowerArr[lowerCase];
       generatedArr.push(lowerVal);
