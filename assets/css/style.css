@@ -14,8 +14,8 @@
 /************************************************
    GENERAL                              @general
 
-   The base styles for the page, text
-   and links. Includes utility class styles
+   The base styles for the page
+   Includes utility class styles
 ************************************************/
 :root {
   --bg-color-one: #461220;
@@ -48,9 +48,7 @@ body {
 /************************************************
    HEADER                                @header
 
-   The styles for the header which
-   includes a title, an image and a 
-   horizontal menu (desktop and mobile)
+   The styles for the header
 ************************************************/
 .main-header {
   text-align: center;
