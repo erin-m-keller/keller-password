@@ -1,9 +1,9 @@
-# Password Generator Starter Code
+# Password Generator
 
 ## Description
 
-This challenge is a code refactor challenge. Horiseon code is supplied and must be refactored
-to follow accessibility standards as well as optimizing the page for search engines.
+This challenge is a javascript challenge. Website must generate a password based on
+user selected criteria.
 
 ## User Story
 
