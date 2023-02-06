@@ -5,11 +5,25 @@ var specialArr = ["!", "@", "#", "$", "%", "^", "&", "*", "(", ")", "+", "?", "/
 var numericArr = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
 var generatedArr = [];
 
-/* get references to the #generate element */
+/* get references to element */
 var generateBtn = document.querySelector("#generate");
+var copyBtn = document.querySelector("#copy");
+var textToCopy = document.querySelector("#password");
 
-/* add event listener to generate button */
+/* add event listener to elements */
 generateBtn.addEventListener("click", writePassword);
+copyBtn.addEventListener("click", copyToClipboard);
+
+/* 
+ * copy password to clipboard 
+ * referenced from W3Schools
+ * https://www.w3schools.com/howto/howto_js_copy_clipboard.asp
+*/
+function copyToClipboard() {
+  textToCopy.select();
+  textToCopy.setSelectionRange(0, 99999); 
+  navigator.clipboard.writeText(textToCopy.value);
+}
 
 /* get character length */
 function getCharLength() {
@@ -159,4 +173,5 @@ function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
+  copyBtn.disabled = false;
 }
