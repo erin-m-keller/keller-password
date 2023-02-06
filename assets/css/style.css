@@ -166,7 +166,7 @@ body {
   resize: none;
   overflow: hidden;
 }
-@media (max-width: 690px) {
+@media (max-width: 800px) {
   .btn {
     font-size: 1rem;
     margin: 16px 0px 0px 0px;
