@@ -134,12 +134,19 @@ function generatePassword() {
       var lowerVal = lowerArr[lowerCase];
       generatedArr.push(lowerVal);
     }
-  } else {
+  } else if (lowerCaseFlag === "N" && upperCaseFlag === "Y") {
     /* generate random uppercase values for the needed number of characters */
     for (var l = 0; l < numElemsNeed; l++) {
       var upperCase = Math.floor(Math.random() * upperArr.length);
       var upperVal = upperArr[upperCase];
       generatedArr.push(upperVal);
+    }
+  } else {
+    /* user did not specify upper or lowercase so generate lowercase */
+    for (var m = 0; m < (numElemsNeed / 2); m++) {
+      var lowerCase = Math.floor(Math.random() * lowerArr.length);
+      var lowerVal = lowerArr[lowerCase];
+      generatedArr.push(lowerVal);
     }
   }
   /* shuffle array and return string to write password function */
