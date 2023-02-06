@@ -16,9 +16,9 @@ copyBtn.addEventListener("click", copyToClipboard);
 
 /* 
  * copy password to clipboard 
- * referenced from W3Schools
+ * reference from W3Schools
  * https://www.w3schools.com/howto/howto_js_copy_clipboard.asp
-*/
+ */
 function copyToClipboard() {
   textToCopy.select();
   textToCopy.setSelectionRange(0, 99999); 
@@ -37,7 +37,7 @@ function getCharLength() {
     charLength = parseInt(prompt('Enter the number of characters you would like for your password. (Minimum 8 - Maximum 128)'));
   }
 
-  /* return the users choice to the original function that triggered this function */
+  /* return the users choice to the @generatePassword function */
   return charLength;
 }
 
@@ -53,32 +53,20 @@ function getCharType() {
     numericChar = prompt('Would you like numeric characters? (Y/N)');
     specialChar = prompt('Would you like special characters? (Y/N)');
 
-    /* check if one character type is selected, if it is then break the loop. otherwise, display alert and prompts again */
+    /* check if one character type is selected, if it is then break the loop. otherwise, display alert and prompt(s) again */
     if (lowerChar.toUpperCase() != "Y" && upperChar.toUpperCase() != "Y" && numericChar.toUpperCase() != "Y" && specialChar.toUpperCase() != "Y") {
       alert("You must select at least one character type to continue.")
     } else {
-      /* ends the loop */
+      /* end the loop */
       charFlag = true;
     }
   }
-  /* return the users choice to the original function that triggered this function */
+  /* return the users criteria to the @generatePassword function */
   var charArr = [
-    {
-      name: "lowerCase",
-      value: lowerChar.toUpperCase()
-    },
-    {
-      name: "upperCase",
-      value: upperChar.toUpperCase()
-    },
-    {
-      name: "numeric",
-      value: numericChar.toUpperCase()
-    },
-    {
-      name: "special",
-      value: specialChar.toUpperCase()
-    }
+    { value: lowerChar.toUpperCase() },
+    { value: upperChar.toUpperCase() },
+    { value: numericChar.toUpperCase() },
+    { value: specialChar.toUpperCase() }
   ];
   return charArr;
 }
@@ -97,7 +85,11 @@ function getCharType() {
   return a;
 }
 
-/* generate the password based on user input: character length, lower/upper/numeric/special */
+/* 
+ * @generatePassword
+ * generate the password based on user criteria: 
+ * character length, lower/upper/numeric/special 
+ */
 function generatePassword() {
 
   var charLength = getCharLength();
@@ -107,8 +99,9 @@ function generatePassword() {
   var numericFlag = charType[2].value;
   var specialCharFlag = charType[3].value;
   var numElemsNeed = charLength - generatedArr.length;
+
   /* 
-   * referenced Math.floor(Math.random() * array.length); 
+   * reference (Math.floor(Math.random() * array.length)); 
    * from stackoverflow: 
    * https://stackoverflow.com/questions/19269545/how-to-get-a-number-of-random-elements-from-an-array 
    * 
@@ -156,19 +149,22 @@ function generatePassword() {
       generatedArr.push(upperVal);
     }
   } else {
-    /* user did not specify upper or lowercase so generate lowercase */
+    /* user did not specify upper or lower so generate lowercase */
     for (var m = 0; m < numElemsNeed; m++) {
       var lowerCase = Math.floor(Math.random() * lowerArr.length);
       var lowerVal = lowerArr[lowerCase];
       generatedArr.push(lowerVal);
     }
   }
-  /* shuffle array and return string to write password function */
+  /* shuffle array and return string to @writePassword function */
   var password = shuffle(generatedArr);
   return password.join("");
 }
 
-/* write password to the #password input */
+/* 
+ * @writePassword
+ * write password to the #password input 
+ */
 function writePassword() {
   var password = generatePassword();
   var passwordText = document.querySelector("#password");
