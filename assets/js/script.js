@@ -86,6 +86,19 @@ function getCharType() {
 }
 
 /* 
+ * @generatePasswordValues
+ * loop through the character arrays based on input
+ * to generate the password
+ */
+function generatePasswordValues(num, arr, numElemsNeed) {
+  for (var i = 0; i < (numElemsNeed / num); i++) {
+    var idx = Math.floor(Math.random() * arr.length);
+    var val = arr[idx];
+    generatedArr.push(val);
+  }
+}
+
+/* 
  * @generatePassword
  * generate the password based on user criteria: 
  * character length, lower/upper/numeric/special 
@@ -98,7 +111,7 @@ function generatePassword() {
   var upperCaseFlag = charType[1].value;
   var numericFlag = charType[2].value;
   var specialCharFlag = charType[3].value;
-  var numElemsNeed = charLength - generatedArr.length;
+  console.log("charLength: " + charLength);
 
   /* 
    * reference (Math.floor(Math.random() * array.length)); 
@@ -106,56 +119,41 @@ function generatePassword() {
    * https://stackoverflow.com/questions/19269545/how-to-get-a-number-of-random-elements-from-an-array 
    * 
    */
-
-  /* pull a random numeric value from the numeric array if user wanted a numeric value and add to generated array */
-  if (numericFlag === "Y") {
-    var randomNumeric = Math.floor(Math.random() * numericArr.length);
-    var numericVal = numericArr[randomNumeric];
-    generatedArr.push(numericVal);
-  }
-
-  /* pull a random special character from the special array if user wanted a special character and add to generated array */
-  if (specialCharFlag === "Y") {
-    var randomSpecial = Math.floor(Math.random() * specialArr.length);
-    var specialVal = specialArr[randomSpecial];
-    generatedArr.push(specialVal);
-  }
-
-  if (lowerCaseFlag === "Y" && upperCaseFlag === "Y") {
-    /* generate random lowercase values for half the needed number of characters */
-    for (var i = 0; i < (numElemsNeed / 2); i++) {
-      var lowerCase = Math.floor(Math.random() * lowerArr.length);
-      var lowerVal = lowerArr[lowerCase];
-      generatedArr.push(lowerVal);
-    }
-    /* generate random uppercase values for half the needed number of characters */
-    for (var j = 0; j < (numElemsNeed / 2); j++) {
-      var upperCase = Math.floor(Math.random() * upperArr.length);
-      var upperVal = upperArr[upperCase];
-      generatedArr.push(upperVal);
-    }
-  } else if (lowerCaseFlag === "Y" && upperCaseFlag === "N") {
+  if (lowerCaseFlag === "Y" && upperCaseFlag === "Y" && numericFlag === "Y" && specialCharFlag === "Y") {
+    /* generate random lowercase values for 1/4 the needed number of characters */
+    generatePasswordValues(4,lowerArr,charLength);
+    /* generate random uppercase values for 1/4 the needed number of characters */
+    generatePasswordValues(4,upperArr,charLength);
+    /* generate random numeric values for 1/4 the needed number of characters */
+    generatePasswordValues(4,numericArr,charLength);
+    /* generate random special values for 1/4 the needed number of characters */
+    generatePasswordValues(4,specialArr,charLength);
+  } else if (lowerCaseFlag === "N" && upperCaseFlag === "Y" && numericFlag === "Y" && specialCharFlag === "Y") {
+    /* generate random uppercase values for 1/3 the needed number of characters */
+    generatePasswordValues(3,upperArr,charLength);
+    /* generate random numeric values for 1/3 the needed number of characters */
+    generatePasswordValues(3,numericArr,charLength);
+    /* generate random special values for 1/3 the needed number of characters */
+    generatePasswordValues(3,specialArr,charLength);
+  } else if (lowerCaseFlag === "N" && upperCaseFlag === "N" && numericFlag === "Y" && specialCharFlag === "Y") {
+    /* generate random numeric values for 1/2 the needed number of characters */
+    generatePasswordValues(2,numericArr,charLength);
+    /* generate random special values for 1/2 the needed number of characters */
+    generatePasswordValues(2,specialArr,charLength);
+  } else if (lowerCaseFlag === "N" && upperCaseFlag === "N" && numericFlag === "N" && specialCharFlag === "Y") {
+    /* generate random special values for the needed number of characters */
+    generatePasswordValues(1,specialArr,charLength);
+  } else if (lowerCaseFlag === "Y" && upperCaseFlag === "N" && numericFlag === "N" && specialCharFlag === "N") {
     /* generate random lowercase values for the needed number of characters */
-    for (var k = 0; k < numElemsNeed; k++) {
-      var lowerCase = Math.floor(Math.random() * lowerArr.length);
-      var lowerVal = lowerArr[lowerCase];
-      generatedArr.push(lowerVal);
-    }
-  } else if (lowerCaseFlag === "N" && upperCaseFlag === "Y") {
+    generatePasswordValues(1,lowerArr,charLength);
+  } else if (lowerCaseFlag === "N" && upperCaseFlag === "Y" && numericFlag === "N" && specialCharFlag === "N") {
     /* generate random uppercase values for the needed number of characters */
-    for (var l = 0; l < numElemsNeed; l++) {
-      var upperCase = Math.floor(Math.random() * upperArr.length);
-      var upperVal = upperArr[upperCase];
-      generatedArr.push(upperVal);
-    }
-  } else {
-    /* user did not specify upper or lower so generate lowercase */
-    for (var m = 0; m < numElemsNeed; m++) {
-      var lowerCase = Math.floor(Math.random() * lowerArr.length);
-      var lowerVal = lowerArr[lowerCase];
-      generatedArr.push(lowerVal);
-    }
-  }
+    generatePasswordValues(1,upperArr,charLength);
+  } else if (lowerCaseFlag === "N" && upperCaseFlag === "N" && numericFlag === "Y" && specialCharFlag === "N") {
+    /* generate random numeric values for the needed number of characters */
+    generatePasswordValues(1,numericArr,charLength);
+  } 
+
   /* shuffle array and return string to @writePassword function */
   var password = shuffle(generatedArr);
   return password.join("");
@@ -170,4 +168,5 @@ function writePassword() {
   var passwordText = document.querySelector("#password");
   passwordText.value = password;
   copyBtn.disabled = false;
+  generatedArr = [];
 }
