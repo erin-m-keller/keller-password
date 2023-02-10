@@ -91,6 +91,12 @@ function getCharType() {
  * to generate the password
  */
 function generatePasswordValues(num, arr, numElemsNeed) {
+  /* 
+   * reference (Math.floor(Math.random() * array.length)); 
+   * from stackoverflow: 
+   * https://stackoverflow.com/questions/19269545/how-to-get-a-number-of-random-elements-from-an-array 
+   * 
+   */
   for (var i = 0; i < (numElemsNeed / num); i++) {
     var idx = Math.floor(Math.random() * arr.length);
     var val = arr[idx];
@@ -111,14 +117,7 @@ function generatePassword() {
   var upperCaseFlag = charType[1].value;
   var numericFlag = charType[2].value;
   var specialCharFlag = charType[3].value;
-  console.log("charLength: " + charLength);
 
-  /* 
-   * reference (Math.floor(Math.random() * array.length)); 
-   * from stackoverflow: 
-   * https://stackoverflow.com/questions/19269545/how-to-get-a-number-of-random-elements-from-an-array 
-   * 
-   */
   if (lowerCaseFlag === "Y" && upperCaseFlag === "Y" && numericFlag === "Y" && specialCharFlag === "Y") {
     /* generate random lowercase values for 1/4 the needed number of characters */
     generatePasswordValues(4,lowerArr,charLength);
@@ -161,7 +160,11 @@ function generatePassword() {
 
 /* 
  * @writePassword
- * write password to the #password input 
+ * generate password then 
+ * write password to the 
+ * #password input; enable 
+ * copy to clipboard button 
+ * and empty password array
  */
 function writePassword() {
   var password = generatePassword();
