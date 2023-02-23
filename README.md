@@ -7,7 +7,7 @@ user selected criteria.
 
 ## User Story
 
-```
+```md
 AS AN employee with access to sensitive data
 I WANT to randomly generate a password that meets certain criteria
 SO THAT I can create a strong password that provides greater security
@@ -15,7 +15,7 @@ SO THAT I can create a strong password that provides greater security
 
 ## Acceptance Criteria
 
-```
+```md
 GIVEN I need a new, secure password
 WHEN I click the button to generate a password
 THEN I am presented with a series of prompts for password criteria
@@ -39,8 +39,8 @@ THEN the password is either displayed in an alert or written to the page
 
 ## Deployed page
 
-Page published at: [https://erin-m-keller.github.io/password-generator/](https://erin-m-keller.github.io/password-generator/)
+[View Published Page](https://erin-m-keller.github.io/password-generator/)
 
 ## License
 
-Please refer to the LICENSE in the repo.
+[MIT](https://choosealicense.com/licenses/mit/)
