@@ -45,7 +45,7 @@ THEN the password is either displayed in an alert or written to the page
 
 ## Deployed page
 
-[View Published Page](https://erin-m-keller.github.io/password-generator/)
+[View Published Page](https://erin-m-keller.github.io/keller-password/)
 
 ## License
 
